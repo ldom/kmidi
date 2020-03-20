@@ -1,0 +1,4 @@
+confluent-kafka==1.3.0
+humanfriendly==8.1
+midi==0.2.3
+mido==1.2.9
