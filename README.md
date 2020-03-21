@@ -47,11 +47,12 @@ Notes:
 fluidsynth ./Steinway_B-JNv2.0.sf2 --portname=fluidsynth -s
 ```
  
- Run the consumer (using the long form for arguments):
+ Run the consumer (default values are `--bootstrap-servers localhost:9092  --notes-topic midi_notes`):
 ```
-python kmidi_instrument.py --bootstrap-servers localhost:9092  --notes-topic midi_notes 
+python kmidi_instrument.py 
+ 
 ```
-then run the producer (using the argument shortcuts):
+then run the producer:
 ```
 python kmidi_player.py -m midi/*.mid
 ```
@@ -60,7 +61,23 @@ You should now hear some lovely music.
 
 Run your Kafka load test using `kafka-producer-perf-test` and `kafka-consumer-perf-test`.
 
+The producer sends the notes to the topic respecting the melody. It pauses the proper amount of time before sending the next note(s). The consumer plays the notes as they arrive.
+
 When the music slows down, you know your cluster is slowing down... If the music gets wrong, with silences too long  and irregular between notes, it shows a certain inbalance between consumers. 
 
 Et voilà.
 
+## Player and instrument options
+
+```
+usage: kmidi_instrument.py [-h] [-b BOOTSTRAP_SERVERS] [-t NOTES_TOPIC]
+
+Plays/consumes MIDI notes from a Kafka topic
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BOOTSTRAP_SERVERS, --bootstrap-servers BOOTSTRAP_SERVERS
+                        Bootstrap servers (defaults to 'localhost:9092')
+  -t NOTES_TOPIC, --notes_topic NOTES_TOPIC
+                        Topic to consume notes from (defaults = 'midi_notes')
+```
