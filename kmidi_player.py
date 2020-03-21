@@ -15,7 +15,8 @@ def handle_arguments():
     parser = argparse.ArgumentParser(description='Sends/produces MIDI file notes into a Kafka topic')
 
     parser.add_argument("-m", "--midi-files",
-                        help="Folder with MIDI files to play")
+                        help="Folder with MIDI files to play",
+                        required=True)
 
     parser.add_argument("-b", "--bootstrap-servers",
                         help="Bootstrap servers (defaults to 'localhost:9092')",
@@ -27,7 +28,7 @@ def handle_arguments():
 
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-s", "--speed-ratio",
-                        help="Speed ratio (1.1 slows down production by 10%, 0.9 speeds up by 10%, defaults = 1.0)",
+                        help="Speed ratio (1.1 slows down production by 10%%, 0.9 speeds up by 10%%, defaults = 1.0)",
                         default=1.0, type=float)
     group.add_argument('--gg-1955', action='store_true',
                        help="Speed ratio corresponding to Glenn Gould's 1955 intepretation of the Goldberg Variations")

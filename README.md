@@ -67,7 +67,34 @@ When the music slows down, you know your cluster is slowing down... If the music
 
 Et voilà.
 
-## Player and instrument options
+## Player options
+
+```
+usage: kmidi_player.py [-h] -m MIDI_FILES [-b BOOTSTRAP_SERVERS]
+                       [-t NOTES_TOPIC]
+                       [-s SPEED_RATIO | --gg-1955 | --gg-1981]
+
+Sends/produces MIDI file notes into a Kafka topic
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MIDI_FILES, --midi-files MIDI_FILES
+                        Folder with MIDI files to play
+  -b BOOTSTRAP_SERVERS, --bootstrap-servers BOOTSTRAP_SERVERS
+                        Bootstrap servers (defaults to 'localhost:9092')
+  -t NOTES_TOPIC, --notes-topic NOTES_TOPIC
+                        Topic to produce (play) notes to (defaults =
+                        'midi_notes')
+  -s SPEED_RATIO, --speed-ratio SPEED_RATIO
+                        Speed ratio (1.1 slows down production by 10%, 0.9
+                        speeds up by 10%, defaults = 1.0)
+  --gg-1955             Speed ratio corresponding to Glenn Gould's 1955
+                        intepretation of the Goldberg Variations
+  --gg-1981             Speed ratio corresponding to Glenn Gould's 1981
+                        intepretation of the Goldberg Variations
+```
+
+## Instrument options
 
 ```
 usage: kmidi_instrument.py [-h] [-b BOOTSTRAP_SERVERS] [-t NOTES_TOPIC]
