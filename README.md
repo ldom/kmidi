@@ -18,7 +18,7 @@ I have included a small Stenway piano file (Steinway_B-JNv2.0.sf2). It comes fro
 
 I have also included MIDI files containing my favorite piano pieces.
 
-To install `kmidi`, download or fork this repo, <a href='https://virtualenv.pypa.io/en/latest/'>create a virtualenv</a> (I recommend using <a href='https://pypi.org/project/virtualenvwrapper/'>virtualenvwrapper</a> too), and:
+To install `kmidi`, download or fork this repo, <a href='https://virtualenv.pypa.io/en/latest/'>create a virtualenv</a> (I recommend using <a href='https://pypi.org/project/virtualenvwrapper/'>virtualenvwrapper</a> over `virtualenv`), and:
 
 ```
 # once your virtualenv is activate:
