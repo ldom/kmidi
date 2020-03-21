@@ -41,14 +41,19 @@ kafka-topics --bootstrap-server localhost:9092 --create --topic midi_notes --par
 Notes: 
 - You should adjust the number of partitions and replication factor to match your typical cluster setup.
 - The script uses the name of the MIDI file as the key so notes should be read in sequence. If you want to hear what happens to the ordering when a consumer is reading from multiple partitions, simply pass the `--no-` option. Warning: it may not be pretty to the ear!
- 
- Run the consumer first (using the long form for arguments):
+
+ Run the synth in server mode:
 ```
-python kmidi_instrument.py --bootstrap-servers localhost:9092  --notes-topic midi_notes --sf2 Steinway_B-JNv2.0.sf2
+fluidsynth ./Steinway_B-JNv2.0.sf2 --portname=fluidsynth -s
+```
+ 
+ Run the consumer (using the long form for arguments):
+```
+python kmidi_instrument.py --bootstrap-servers localhost:9092  --notes-topic midi_notes 
 ```
 then run the producer (using the argument shortcuts):
 ```
-python kmidi_player.py -m midi/*.mid -b localhost:9092 -t midi_notes
+python kmidi_player.py -m midi/*.mid
 ```
 
 You should now hear some lovely music. 
