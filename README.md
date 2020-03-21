@@ -32,7 +32,7 @@ You should hear the lovely Aria of the Goldberg Variations by JS Bach.
 
 ## Run kmidi
 
-To run kmidi, open 2 terminal windows.
+To run kmidi, open 3 terminal windows.
 
 If topics are not created automatically (they shouldn't be), create one for the midi notes:
 ```
@@ -40,30 +40,30 @@ kafka-topics --bootstrap-server localhost:9092 --create --topic midi_notes --par
 ```
 Notes: 
 - You should adjust the number of partitions and replication factor to match your typical cluster setup.
-- The script uses the name of the MIDI file as the key so notes should be read in sequence. If you want to hear what happens to the ordering when a consumer is reading from multiple partitions, simply pass the `--no-` option. Warning: it may not be pretty to the ear!
+- The script uses the name of the MIDI file as the key so notes should be read in sequence. If you want to hear what happens to the ordering when a consumer is reading from multiple partitions, edit the `producer.produce()` call in `play_notes()` of `kmidi_player.py`, but it may not be pretty to the ear!
 
- Run the synth in server mode:
+1- Run the synth in server mode:
 ```
 fluidsynth ./Steinway_B-JNv2.0.sf2 --portname=fluidsynth -s
 ```
  
- Run the consumer (default values are `--bootstrap-servers localhost:9092  --notes-topic midi_notes`):
+2- Run the consumer (default values are `--bootstrap-servers localhost:9092  --notes-topic midi_notes`):
 ```
 python kmidi_instrument.py 
  
 ```
-then run the producer:
+3- run the producer:
 ```
 python kmidi_player.py -m midi/*.mid
 ```
 
 You should now hear some lovely music. 
 
-Run your Kafka load test using `kafka-producer-perf-test` and `kafka-consumer-perf-test`.
+Load your Kafka cluster test using `kafka-producer-perf-test` and `kafka-consumer-perf-test`.
 
-The producer sends the notes to the topic respecting the melody. It pauses the proper amount of time before sending the next note(s). The consumer plays the notes as they arrive.
+The producer sends the notes to the topic respecting the melody. It pauses the proper amount of time before sending the next note(s). The consumer plays the notes as they arrive. So when the music slows down, you know that your cluster throughput is decreasing... If the melody gets wrong, with silences too long  and irregular between notes, it shows a certain inbalance between consumers. 
 
-When the music slows down, you know your cluster is slowing down... If the music gets wrong, with silences too long  and irregular between notes, it shows a certain inbalance between consumers. 
+
 
 Et voilà.
 
