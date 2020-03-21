@@ -1,9 +1,10 @@
 # kmidi
-*Monitor your Kafka cluster performance using music*
 
-Kmidi is a set of 2 python scripts that let you hear how your Kafka cluster performance is doing. 
+Kmidi is a set of python scripts that let you hear how your Kafka cluster performance is doing. 
 
 There is a producer script that sends MIDI notes to a topic and there is a consumer script that reads those notes and plays them to your sound card.
+
+When your Kafka cluster is overloaded, the music slows down or the melody gets weird.
 
 ![diagram](kmidi.png)
 
