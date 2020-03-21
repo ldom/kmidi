@@ -21,7 +21,7 @@ I have also included MIDI files containing my favorite piano pieces.
 To install `kmidi`, download or fork this repo, <a href='https://virtualenv.pypa.io/en/latest/'>create a virtualenv</a> (I recommend using <a href='https://pypi.org/project/virtualenvwrapper/'>virtualenvwrapper</a> over `virtualenv`), and:
 
 ```
-# once your virtualenv is activate:
+# once your virtualenv is active:
 pip install -r requirements.txt
 # if you're on a Mac and use Homebrew, do: 
 brew install fluidsynth
