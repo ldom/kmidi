@@ -27,12 +27,13 @@ def handle_arguments():
 
 def print_note(note_value):
     notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    # octaves = ["subsubcontra", "sub-contra", "contra", "great", "small", "one-lined", "two-lined", "three-lined", "four-lined", "five-lined", "six-lined"]
     nb_notes = 12
     # 0 to 127 assigned to C1 to G9
     octave = int((note_value / nb_notes)) + 1
     note_index = note_value % nb_notes
     note = notes[note_index]
-    print(f"{note} (octave {octave})")
+    print(f"{note} ({octave})")
 
 def sound_note(kafka_msg, outport):
     json_mido_msg = json.loads(kafka_msg.value())

@@ -5,6 +5,8 @@ Kmidi is a set of 2 python scripts that let you hear how your Kafka cluster perf
 
 There is a producer script that sends MIDI notes to a topic and there is a consumer script that reads those notes and plays them to your sound card.
 
+![diagram](kmidi.png)
+
 ## Installation
 
 On the instrument side, in addition to python3 and the py libraries used, you'll need a way to turn the MIDI notes into actual sound... For this I'm using fluidsynth, which uses SoundFont files.
