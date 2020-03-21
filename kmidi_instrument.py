@@ -6,6 +6,7 @@ from sys import exit
 from confluent_kafka import Consumer  #, KafkaError
 import mido
 
+
 def handle_arguments():
     parser = argparse.ArgumentParser(description='Plays/consumes MIDI notes from a Kafka topic')
 
@@ -34,6 +35,7 @@ def print_note(note_value):
     note_index = note_value % nb_notes
     note = notes[note_index]
     print(f"{note} ({octave})")
+
 
 def sound_note(kafka_msg, outport):
     json_mido_msg = json.loads(kafka_msg.value())

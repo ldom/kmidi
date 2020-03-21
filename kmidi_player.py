@@ -4,7 +4,6 @@ from signal import signal, SIGINT
 from sys import exit
 import time
 
-
 from mido import MidiFile
 from confluent_kafka import Producer
 
@@ -90,14 +89,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-if __name__ == '__main__':
-    # Tell Python to run the handler() function when SIGINT is recieved
-
-    print('Running. Press CTRL-C to exit.')
-    while True:
-        # Do nothing and hog CPU forever until SIGINT received.
-        pass
