@@ -25,7 +25,7 @@ brew install fluidsynth
 and test your fluidsynth setup with:
 
 ```
-fluidsynth  Steinway_B-JNv2.0.sf2 midi/bwv988.mid
+fluidsynth  Steinway_B-JNv2.0.sf2 midi/bach_988_aria.mid
 ``` 
 
 You should hear the lovely Aria of the Goldberg Variations by JS Bach.
