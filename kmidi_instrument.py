@@ -18,11 +18,6 @@ def handle_arguments():
                         help="Topic to consume notes from (defaults = 'midi_notes')",
                         default="midi_notes")
 
-    # parser.add_argument("--sf2",
-    #                     help="SoundFont file to use",
-    #                     required=True)
-    # --sf2 Steinway_B-JNv2.0.sf2
-
     return parser.parse_args()
 
 

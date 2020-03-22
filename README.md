@@ -57,7 +57,7 @@ python kmidi_instrument.py
 ```
 3- run the producer, adjusting the `record size` to match your cluster/application average message size (see Notes below):
 ```
-python kmidi_player.py -m midi/*.mid --record-size 10000
+python kmidi_player.py -m 'midi/*.mid' --record-size 10000
 ```
 
 You should now hear some nice music. 
