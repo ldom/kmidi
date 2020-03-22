@@ -1,6 +1,8 @@
 import argparse
 import json
+import random
 from signal import signal, SIGINT
+import string
 from sys import exit
 import time
 
@@ -34,6 +36,11 @@ def handle_arguments():
     group.add_argument('--gg-1981', action='store_true',
                        help="Speed ratio corresponding to Glenn Gould's 1981 intepretation of the Goldberg Variations")
 
+    parser.add_argument("--record-size",
+                        help="Additional payload to add to each MIDI note message to match the cluster/application average message size",
+                        type=int,
+                        default=0)
+
     return parser.parse_args()
 
 
@@ -42,12 +49,14 @@ def delivery_report(err, msg):
         print('Message delivery failed: {}'.format(err))
 
 
-def play_notes(producer, topic, midi_file, speed_ratio):
+def play_notes(producer, topic, midi_file, speed_ratio, additional_payload_size):
     print(f"Playing {midi_file}... at {speed_ratio}")
     for midi_msg in MidiFile(midi_file):
         time.sleep(midi_msg.time * speed_ratio)
 
         if not midi_msg.is_meta and midi_msg.type in ('note_on', 'note_off'):
+            payload = ''.join(random.choices(string.ascii_uppercase + string.digits, k=additional_payload_size)) \
+                if additional_payload_size else ''
             kafka_msg = json.dumps({
                 'time': midi_msg.time,
                 'type': midi_msg.type,
@@ -55,6 +64,7 @@ def play_notes(producer, topic, midi_file, speed_ratio):
                 'note': midi_msg.note,
                 'velocity': midi_msg.velocity,
                 'hex': midi_msg.hex(),
+                'extra_payload': payload
             })
             # print(kafka_msg)
             producer.produce(topic, value=kafka_msg.encode('utf-8'), key=midi_file, callback=delivery_report)
@@ -84,7 +94,8 @@ def main():
 
     p = Producer({'bootstrap.servers': args.bootstrap_servers})
     for f in files_to_play:
-        play_notes(producer=p, topic=args.notes_topic, midi_file=f, speed_ratio=speed_ratio)
+        play_notes(producer=p, topic=args.notes_topic, midi_file=f,
+                   speed_ratio=speed_ratio, additional_payload_size=args.record_size)
 
 
 if __name__ == "__main__":
