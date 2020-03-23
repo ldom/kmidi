@@ -68,6 +68,8 @@ The producer sends the notes to the topic respecting the melody. It pauses the p
 
 Et voilà.
 
+See it in action: https://youtu.be/30efBYw5uyU
+
 Notes: 
 - You should adjust the number of partitions and replication factor to match your typical cluster setup.
 - The script uses the name of the MIDI file as the key so notes should be read in sequence. If you want to hear what happens to the ordering when a consumer is reading from multiple partitions, edit the `producer.produce()` call in `play_notes()` of `kmidi_player.py`, but it may not be pretty to the ear!
